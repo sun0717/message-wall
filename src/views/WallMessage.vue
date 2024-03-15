@@ -6,26 +6,43 @@
             <p class="label-list" :class="{selected: labelCurIndex === -1}" @click="handleChange(-1)">全部</p>
             <p class="label-list" :class="{selected: labelCurIndex === index}" v-for="(item, index) in label[id]" :key="index" @click="handleChange(index)">{{ item }}</p>
         </div>
-        <node-card></node-card>
+        <div class="card" :style="{width: cardWidth + 'px'}">
+            <note-card v-for="(item, index) in note.data" :key="index" :note="item" class="card-inner" :width="'288px'"></note-card>
+        </div>
     </div>
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue';
+import {onMounted, onUnmounted, ref, watchEffect} from 'vue';
 import { wallType, label } from '@/utils/data';
-import NodeCard from '@/components/NodeCard.vue';
+import NoteCard from '@/components/NoteCard.vue';
+import { note } from '../../mock/index';
 // import Typed from 'typed.js';
 
 const id = ref(0)
 const labelCurIndex = ref(-1) // -1 为全选
+const cardWidth = ref(0)
 // const element = ref(null)
-const strTyped = ref(wallType)
+// const strTyped = ref(wallType)
 const handleChange = (value) => {
-    labelCurIndex.value = value;
+    labelCurIndex.value = value
 }
-
+const noteWidth = () => {
+    // 页面宽度
+    let width = document.body.clientWidth;
+    // 120 两边间距,300是 pc端 padding + 288px
+    // 除300可以算出一页能放多少
+    cardWidth.value = Math.floor((width - 120) / 300) * 300;
+}
+noteWidth()
 
 onMounted(() => {
+    // 监听屏幕宽度变化
+    window.addEventListener('resize', noteWidth)
+})
+
+onUnmounted(() => {
+    window.removeEventListener('resize', noteWidth)
 })
 </script>
 
@@ -65,6 +82,18 @@ onMounted(() => {
             font-weight: 600;
             border: 2px solid rgba(32,32,32,1);
             border-radius: 14px;
+        }
+    }
+
+    .card {
+        display: flex;
+        flex-wrap: wrap;
+        border: 1px solid red;
+        justify-content: center;
+        padding-top: 28px;
+        margin: auto;
+        .card-inner {
+            margin: 6px;
         }
     }
 }

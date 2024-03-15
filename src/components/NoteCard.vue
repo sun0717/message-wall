@@ -1,34 +1,42 @@
 <template>
-    <div class="node-card" :style="{width:width,background:'rgba(252, 175, 162, .3)'}">
+    <div class="node-card" :style="{width:width,background:cardColor[card.imgurl]}">
         <div class="top">
-            <p class="time">2024.3</p>
-            <p class="label">具有</p>
+            <p class="time">{{ dayjs(card.moment).format('YYYY.MM.DD') }}</p>
+            <p class="label">{{ label[card.type][card.label] }}</p>
         </div>
         <p class="message">
-            只是因为在人群中多看了你一眼
+            {{ card.message }}
         </p>
         <div class="foot">
             <div class="foot-left">
                 <div class="x">
                     <span class="iconfont icon-aixin"></span>
-                    <span class="value">3</span>
+                    <span class="value">{{ card.like }}</span>
                 </div>
                 <div class="x">
                     <span class="iconfont icon-xiaoxi-zhihui"></span>
-                    <span class="value">3</span>
+                    <span class="value">{{ card.comment }}</span>
                 </div>
             </div>
-            <div class="name">星雨</div>
+            <div class="name">{{ card.name }}</div>
         </div>
     </div>
 </template>
 
 <script setup>
-defineProps({
+import { label, cardColor } from '@/utils/data'
+import dayjs from 'dayjs';
+import { computed } from 'vue';
+let props = defineProps({
     width: {
         default: '288px',
     },
+    note: {
+        default: {},
+    }
 })
+let card = computed(() => props.note)
+console.log(card.value)
 </script>
 
 <style lang="less" scoped>

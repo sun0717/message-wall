@@ -15,7 +15,7 @@
                 <a-space >
                     <icon-github :style="{fontSize:'32px'}" ></icon-github>
                     <a-popover position="bottom" title="wx" >
-                        <icon-wechat :style="{fontSize:'32px'}" style="color:"></icon-wechat>
+                        <icon-wechat :style="{fontSize:'32px'}"></icon-wechat>
                         <template #content>
                             <img :src="qr" alt="qrcode" style="width:80px"/>
                         </template>
@@ -35,14 +35,11 @@ import qr from '@/assets/images/qr_weixin.png'
 <style lang="less" scoped>
 .footer-bar {
     display: flex;
-    position: fixed;
-    left: 0;
-    bottom: 0;
     justify-content: center;
     width: 100%;
     height: 120px;
     background: @primary-color;
-
+    margin-top: 40px;
     .center {
         min-width: 700px;
         width: 70%;
