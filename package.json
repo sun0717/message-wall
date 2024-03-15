@@ -11,12 +11,16 @@
   "dependencies": {
     "axios": "^1.6.7",
     "pinia": "^2.1.7",
-    "sass": "^1.72.0",
+    "typed.js": "^2.1.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@arco-design/web-vue": "^2.54.6",
     "@vitejs/plugin-vue": "^5.0.4",
-    "vite": "^5.1.6"
+    "less": "^4.2.0",
+    "mockjs": "^1.1.0",
+    "vite": "^5.1.6",
+    "vite-plugin-mock": "^3.0.1"
   }
 }

@@ -1,0 +1,49 @@
+@primary-color: #3873F0; // 全局主色
+@link-color: #1890ff; // 链接色
+@success-color: #22BF87; // 成功色
+@warning-color: #F67770; // 警告色
+@error-color: #F35248; // 错误色
+@like-color: #F67770; // 喜欢
+@gray-1: #202020;
+@gray-2: #5B5B5B;
+@gray-3: #949494;
+@gray-9:#F6F6F8;
+@gray-10:#ffffff;
+@size-12: 12px;
+@size-14: 14px;
+@size-16: 16px;
+@padding-4: 4px;
+@padding-8: 8px;
+@padding-12: 12px;
+@padding-20: 20px;
+
+@tr: all .3s;
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    line-height: 1.5;
+    color: @gray-1;
+    font-size: @size-14;
+    background-color: @gray-10;
+    transition: all .3s;
+    box-sizing: border-box;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+input, textarea {
+    outline: none;
+}
