@@ -10,4 +10,4 @@ css: {
 ```
 typed.js需要做跨域，不然报504
 
-vite-plugin-mock
+首部显示隐藏采用emits

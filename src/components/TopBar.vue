@@ -5,8 +5,8 @@
             <p class="logo-name">小雨星影</p>
         </div>
         <div class="menu">
-            <xy-button size="large" activeX="cprimary" class="btnMessage">留言墙</xy-button>
-            <xy-button size="large" activeX="csecondary">照片墙</xy-button>
+            <xy-button size="large" :activeX="id === '0' ? 'cprimary' : 'csecondary'" class="btnMessage" @click="handleClick(0)">留言墙</xy-button>
+            <xy-button size="large" :activeX="id === '1' ? 'cprimary' : 'csecondary'" @click="handleClick(1)">照片墙</xy-button>
         </div>
         <div class="user">
             <div class="user-head"></div>
@@ -15,7 +15,18 @@
 </template>
 
 <script setup>
-import XyButton from './XyButton.vue';
+import { computed, ref, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import XyButton from './XyButton.vue'
+
+const router = useRouter()
+const route = useRoute()
+const id = computed(() => route.query.id)
+const handleClick = (id) => {
+    const query = { ...route.query };
+    query.id = id;
+    router.replace({ query });
+}
 </script>
 
 <style lang="less" scoped>

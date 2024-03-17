@@ -8,10 +8,6 @@ export default defineConfig(({ command, mode }) => {
   return {
     plugins: [
       vue(),      
-      viteMockServe({
-        mockPath: 'mock',
-        localEnabled: command === 'serve',
-      }),
     ],
     resolve: {
       alias: {

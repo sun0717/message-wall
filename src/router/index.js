@@ -7,6 +7,7 @@ const router = createRouter({
     routes: [
         {
             path: '/',
+            redirect: '/wall?id=0',
             name: 'index',
             component: XiaoYuIndex,
             children: [

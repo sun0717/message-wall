@@ -36,7 +36,6 @@ let props = defineProps({
     }
 })
 let card = computed(() => props.note)
-console.log(card.value)
 </script>
 
 <style lang="less" scoped>
