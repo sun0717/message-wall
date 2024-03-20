@@ -4,10 +4,10 @@
             <div class="user-head" :style="{background: portrait[item.imgurl]}"></div>
             <div class="user-name">{{ item.name }}</div>
         </div>
-        <div class="timestamp">{{ dayjs(item.moment).format('YYYY-MM-DD') }}</div>
         <div class="content">
             {{ item.message }}
         </div>
+        <div class="timestamp">{{ dayjs(item.moment).format('YYYY-MM-DD') }}</div>
     </div>
 </template>
 
@@ -42,6 +42,7 @@ console.log(props.item)
 }
 
 .comment .timestamp {
+    padding: @padding-8;
     font-size: 0.8em;
     color: #999;
 }
@@ -49,6 +50,7 @@ console.log(props.item)
 .comment .content {
     margin-top: 5px;
     line-height: 1.8;
+    padding: @padding-8;
 }
 
 /* 示例样式 */

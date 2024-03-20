@@ -10,7 +10,9 @@
             <note-card v-for="(item, index) in note.data" :key="index" :note="item" class="card-inner" :width="'288px'" :class="{ cardselected: index === cardselected }" @click="selectedCard(index)"></note-card>
         </div>
         <div class="photo" v-show="id == 1">
-            <photo-card :photo="item" class="photo-card" v-for="(item, index) in photoT" :key="index"></photo-card>
+            <photo-card :photo="item" class="photo-card" v-for="(item, index) in photoT" :key="index" @click="selectedPhoto(index)"></photo-card>
+            <xy-viewer v-show="modalVisible" :photos="photoArr" :nowNumber="photoselected" @changeNumber="handleChangeNumber"></xy-viewer>
+            <xy-modal v-show="modalVisible" @cloose="changeModal" :isModal="modalVisible"/>
         </div>
         <div class="add">
             <icon-plus-circle-fill style="font-size: 64px;" @click="handleClick"/>
@@ -24,7 +26,6 @@
         </a-modal>
     </div>
 </template>
-
 <script setup>
 import { onMounted, onUnmounted, ref, watch, computed } from 'vue';
 import { useRoute } from 'vue-router'
@@ -34,6 +35,8 @@ import NewCard from '@/components/NewCard.vue';
 import CardDetail from '@/components/CardDetail.vue';
 import PhotoCard from '../components/PhotoCard.vue';
 import { note, photo } from '../../mock/index'
+import XyViewer from '@/components/XyViewer.vue';
+import XyModal from '@/components/XyModal.vue';
 // import Typed from 'typed.js';
 
 let $emits = defineEmits(['tabbarHide'])
@@ -42,9 +45,12 @@ const id = computed(() => route.query.id)
 const labelCurIndex = ref(-1) // -1 为全选
 const cardWidth = ref(0)
 const cardselected = ref(-1) // 当前选择卡片
+const photoselected = ref(-1) // 当前选择照片
 const visible = ref(false)
+const modalVisible = ref(false) 
 const photoT = ref(photo.data)
-
+const photoArr = ref([])
+const view = ref(false) // 预览大图
 // const element = ref(null)
 // const strTyped = ref(wallType)
 const handleChange = (value) => {
@@ -59,6 +65,24 @@ const selectedCard = (value) => {
         cardselected.value = -1
         visible.value = false
     }
+}
+
+// 选择照片
+const selectedPhoto = (value) => {
+    if (value !== photoselected.value) {
+        photoselected.value = value
+    } else {
+        photoselected.value = -1
+    }
+    modalVisible.value = !modalVisible.value
+}
+const handleChangeNumber = (e) => {
+    if (e === -1) {
+        photoselected.value -= 1
+    } else {
+        photoselected.value += 1
+    }
+    
 }
 
 const handleClick = async () => {
@@ -83,13 +107,24 @@ const setTextInModal = () => {
     if (cardselected.value !== -1) return '评论'
 }
 
+// 关闭窗口
+const changeModal = ()  => {
+    modalVisible.value = !modalVisible.value
+}
+
+const getPhoto = () => {
+    for (let i = 0; i < photoT.value.length; i++) {
+        photoArr.value.push(photoT.value[i].imgurl)
+    }
+}
+
 watch(visible, (newValue) => {
     $emits('tabbarHide', newValue)
 })
 
-noteWidth()
-
 onMounted(() => {
+    noteWidth()
+    getPhoto()
     // 监听屏幕宽度变化
     window.addEventListener('resize', noteWidth)
 })

@@ -40,7 +40,6 @@ const handleListener = (value) => {
     transform: scale(1);
   }
 }
-
 .bg-video {
     position: fixed;
     top: 0;

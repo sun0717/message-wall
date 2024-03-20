@@ -18,9 +18,7 @@
 
 <script setup>
 import NoteCard from './NoteCard.vue'
-import dayjs from 'dayjs'
 import { comment } from '../../mock/index'
-import { portrait } from '@/utils/data'
 
 import Comment from './Comment.vue'
 defineProps(['card'])
