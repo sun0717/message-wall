@@ -1,8 +1,8 @@
 const controller = require('../controller/dbServe')
 
 module.exports = function(app) {
-    app.get('/test', (req, res) => {
-        res.type('html')
-        res.render('index')
+    // 新建 wall 数据
+    app.post('/insertWall', (req, res) => {
+        controller.insertWall(req, res)
     })
-} 
+}
